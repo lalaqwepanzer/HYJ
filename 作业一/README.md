@@ -53,6 +53,7 @@ for index, value in enumerate(top[:5].values):
 plt.show()
 
 目的：查看数据集中数量前5名的艺术家类型，并绘制条形图。
+![image](https://github.com/user-attachments/assets/7de390c4-c0de-48d2-b07b-f9d360ed50b1)
 
 3.2 三大流派的条形图
 # 筛选特定的音乐类型
@@ -76,6 +77,8 @@ plt.title('Top genres', color='blue')
 plt.show()
 
 目的：识别出当前最受欢迎的三大流派，并绘制条形图。
+![image](https://github.com/user-attachments/assets/4bf8550f-bfaf-40c9-a898-296ad14fb554)
+
 
 3.3 相关性热力图
 # 计算相关性矩阵
@@ -94,6 +97,8 @@ print("Top 5 strongest correlations:")
 print(top5_corr)
 
 目的：计算数据集的相关性矩阵，并绘制热力图，找出最强相关性的前5对变量。
+![image](https://github.com/user-attachments/assets/f57420fa-63bf-4fcb-9530-5667b14885cd)
+
 
 3.4 同心圆图
 from sklearn.preprocessing import LabelEncoder
@@ -106,7 +111,10 @@ g = sns.jointplot(
     x="popularity", y="danceability", hue="artist_top_genre",
     kind="kde",
 )
+
 目的：绘制同心圆图，查看数据分布。
+![image](https://github.com/user-attachments/assets/19ec90d7-99be-4872-ad3f-0fe417469c54)
+从图上看，这三种流派在人气和可舞蹈性方面松散地对齐。这说明聚类时比较麻烦
 
 3.5 箱型图
 # 绘制箱型图并识别异常值
@@ -118,7 +126,10 @@ plt.title('Popularity')
 # ...（省略其他箱型图的绘制代码）
 plt.tight_layout()
 plt.show()
+
 目的：绘制箱型图，直观地查看数据的分布，从中找出异常数据。
+![image](https://github.com/user-attachments/assets/e9c3317a-063b-44fe-a0c3-92cff1da9ef2)
+
 
 3.6 剔除异常值后的箱型图
 # 剔除异常值
@@ -141,6 +152,8 @@ plt.tight_layout()
 plt.show()
 
 目的：剔除异常值后，再次绘制箱型图，查看数据的分布。
+![image](https://github.com/user-attachments/assets/326d5ba3-ab46-482a-b242-db490f60cd40)
+
 
 4. 模型训练
 from sklearn.preprocessing import LabelEncoder
@@ -179,6 +192,7 @@ plt.title('Elbow')
 plt.xlabel('Number of clusters')
 plt.ylabel('WCSS')
 plt.show()
+![image](https://github.com/user-attachments/assets/1547e419-0f62-4b71-85af-872a481d5d5b)
 
 labels = kmeans.labels_
 correct_labels = sum(y == labels)
@@ -186,3 +200,4 @@ print("Result: %d out of %d samples were correctly labeled." % (correct_labels, 
 print('Accuracy score: {0:0.2f}'.format(correct_labels / float(y.size)))
 
 目的：通过计算不同簇数下的WCSS值，为模型调参提供依据。绘制WCSS值随簇数变化的折线图，选择最佳的簇数。根据最佳簇数重新训练模型，并计算模型的准确
+![image](https://github.com/user-attachments/assets/c6b44431-2319-4d02-bde8-ea449c769d79)

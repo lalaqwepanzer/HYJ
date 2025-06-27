@@ -206,6 +206,70 @@ plt.title('Release Date')
 plt.tight_layout()
 plt.show()
 
+from sklearn.preprocessing import LabelEncoder
+
+le = LabelEncoder()  # 创建一个编码器
+
+X = df.loc[:, ('artist_top_genre', 'popularity', 'danceability', 'acousticness', 'loudness',
+               'energy')]  # loc为Selection by Label函数，即为按标签取数据；将需要的标签数据取出作为X训练特征样本
+
+y = df['artist_top_genre']  # 将艺术家流派作为Y验证模型精度标签
+
+X['artist_top_genre'] = le.fit_transform(X['artist_top_genre'])  # 对文本数据进行标签化为数值格式
+
+y = le.transform(y)  # 对文本数据进行标签化为数值格式
+
+from sklearn.cluster import KMeans
+
+nclusters = 3  # 划分3中音乐类型
+seed = 0  # 选择随机初始化种子
+
+km = KMeans(n_clusters=nclusters,
+            random_state=seed)  # 一个random_state对应一个质心随机初始化的随机数种子。如果不指定随机数种子，则 sklearn中的KMeans并不会只选择一个随机模式扔出结果
+km.fit(X)  # 对Kmeans模型进行训练
+
+# 使用训练好的模型进行预测
+
+y_cluster_kmeans = km.predict(X)
+print(y_cluster_kmeans)
+
+from sklearn import metrics
+score = metrics.silhouette_score(X, y_cluster_kmeans)# metrics.silhouette_score函数用于计算轮廓系数
+print(score)
+
+wcss = []
+
+for i in range(1, 11):
+    kmeans = KMeans(n_clusters=i, init='k-means++', random_state=42)
+    kmeans.fit(X)
+    wcss.append(kmeans.inertia_)
+
+plt.figure(figsize=(10, 5))
+sns.lineplot(x=range(1, 11), y=wcss, marker='o', color='red')
+plt.title('Elbow')
+plt.xlabel('Number of clusters')
+plt.ylabel('WCSS')
+plt.show()
+
+from sklearn.cluster import KMeans
+kmeans = KMeans(n_clusters = 3)#设置聚类的簇（类别）数量
+kmeans.fit(X)#对模型进行训练
+labels = kmeans.predict(X)#输出预测值
+plt.scatter(df['popularity'],df['danceability'],c = labels)#以人气为X轴，可舞蹈性为Y轴，标签为类别绘制散点图
+plt.xlabel('popularity')
+plt.ylabel('danceability')
+plt.show()
+
+labels = kmeans.labels_  # 提取出模型中样本的预测值labels
+
+correct_labels = sum(y == labels)  # 统计预测正确的值
+
+print("Result: %d out of %d samples were correctly labeled." % (correct_labels, y.size))
+
+print('Accuracy score: {0:0.2f}'.format(correct_labels / float(y.size)))
+
+
+
 
 
 

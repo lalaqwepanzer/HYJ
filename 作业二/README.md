@@ -15,7 +15,8 @@
 
 ## 数据可视化
 1. **散点图**：绘制南瓜平均价格与月份的关系图。
-![image](https://github.com/user-attachments/assets/7e77d049-335b-467d-93a0-23caa5f82654)
+![image](https://github.com/user-attachments/assets/4e509360-0087-453f-98e0-88bb38aa4bfe)
+
 根据散点图显示，南瓜价格呈现明显的​​季节性波动​​：
 ​​高价期​​（12月-1月）：价格集中在35−50区间
 ​​低价期​​（8月-9月）：价格集中在15−25区间

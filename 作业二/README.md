@@ -39,8 +39,6 @@ MIXED HEIRLOOM	15-38	20-30	中高
 
 ## 模型评估结果
 <img width="485" alt="image" src="https://github.com/user-attachments/assets/a5363d6e-5129-45d2-94cf-6cb5e4d35c03" />
-![image](https://github.com/user-attachments/assets/8312b4e5-95de-42a9-b9a9-273df23bb4b2)
-
 
 
 
@@ -71,4 +69,4 @@ MIXED HEIRLOOM	15-38	20-30	中高
 
 ## 结论
 通过本项目，我们成功分析了南瓜价格与时间、品种之间的关系，并构建了有效的预测模型，得出南瓜价格与南瓜品种的相关性高于销售日期的结论。可以进一步优化模型，引入更多特征以提高预测精度。
-。
+

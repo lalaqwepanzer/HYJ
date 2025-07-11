@@ -271,8 +271,62 @@ plt.grid(True, linestyle='--', alpha=0.3)
 plt.tight_layout()
 plt.show()
 
-# 7. 模型系数分析（展示前5个重要特征）
+# 模型系数分析（展示前5个重要特征）
 coef = pipeline.named_steps['linearregression'].coef_
 features = pipeline.named_steps['polynomialfeatures'].get_feature_names_out(input_features=X.columns)
 coef_df = pd.DataFrame({'特征': features, '系数': coef}).sort_values('系数', key=abs, ascending=False)
 print("重要特征系数分析:\n", coef_df.head(5))
+
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import make_pipeline
+pipeline = make_pipeline(PolynomialFeatures(2), LinearRegression())#构建自动化流程
+pipeline.fit(X_train,Y_train)#训练模型
+pred = pipeline.predict(X_test)#在测试集上预测结果并保存在pred变量中
+rmse = np.sqrt(mean_squared_error(Y_test,pred))#计算RMSE
+print(f'RMSE指标: {rmse:3.3} ({rmse/np.mean(pred)*100:3.3}%)')
+score = pipeline.score(X_train,Y_train)#计算相关系数
+print('相关系数: ', score)
+
+X = pd.get_dummies(new_pumpkins['Variety'])
+Y = new_pumpkins['Price']
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=0)#以8：2的比例划分数据集与训练集 # setup and train the pipeline
+pipeline = make_pipeline(PolynomialFeatures(2), LinearRegression())#构建流程化工具，其中PolynomialFeatures(2)是对输入数据进行2次多项式拟合，后者为构建线性回归模型
+pipeline.fit(X_train,Y_train)
+pred = pipeline.predict(X_test)
+rmse = np.sqrt(mean_squared_error(Y_test,pred))
+print(f'RMSE指标: {rmse:3.3} ({rmse/np.mean(pred)*100:3.3}%)')
+score = pipeline.score(X_train,Y_train)
+print('相关系数: ', score)
+
+X = pd.get_dummies(new_pumpkins['Variety']) \
+    .join(new_pumpkins['Month']) \
+    .join(pd.get_dummies(new_pumpkins['City'])) \
+    .join(pd.get_dummies(new_pumpkins['Package']))
+Y = new_pumpkins['Price']
+
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=0)
+
+lin_reg = LinearRegression()#构建线性回归模型对象
+lin_reg.fit(X_train,Y_train)#训练模型
+
+pred = lin_reg.predict(X_test)#将测试集上的预测值存储在pred中
+rmse = np.sqrt(mean_squared_error(Y_test,pred))#计算均方误差
+print(f'Mean error: {rmse:3.3} ({rmse/np.mean(pred)*100:3.3}%)')#输出均方误差的值以及错误率 score = lin_reg.score(X_train,Y_train)#计算回归系数
+print('Model determination: ', score)#输出回归系数的值
+
+
+X = (pd.get_dummies(new_pumpkins['Variety'])
+     .join(new_pumpkins['Month'])
+     .join(pd.get_dummies(new_pumpkins['City']))
+     .join(pd.get_dummies(new_pumpkins['Package'])))
+Y = new_pumpkins['Price']
+# 划分数据集与建模
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=0)
+pipeline = make_pipeline(PolynomialFeatures(2), LinearRegression())
+pipeline.fit(X_train, Y_train)
+pred = pipeline.predict(X_test)
+
+# 评估
+rmse = np.sqrt(mean_squared_error(Y_test, pred))
+print(f'RMSE: {rmse:.3f} ({rmse/np.mean(pred)*100:.1f}%)')
+print('R² Score:', pipeline.score(X_train, Y_train))

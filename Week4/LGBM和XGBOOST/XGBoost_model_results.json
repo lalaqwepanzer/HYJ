@@ -1,0 +1,33 @@
+{
+    "model_config": {
+        "best_iteration": 1456,
+        "best_score": 0.00664087346019815,
+        "feature_names": [
+            "DayOfYear",
+            "Month",
+            "Year",
+            "Variety",
+            "City",
+            "Package",
+            "DayMonth_interact",
+            "Price_lag7",
+            "Price_rolling_mean7"
+        ]
+    },
+    "evaluation_metrics": {
+        "RMSE": 2.295618307701499,
+        "R2": 0.9992492454356277,
+        "MAPE": 0.676120328579505
+    },
+    "feature_importance": {
+        "DayOfYear": 126.53776550292969,
+        "Month": 111.03138732910156,
+        "Year": 389.0865783691406,
+        "Variety": 439.5129089355469,
+        "City": 318.3393249511719,
+        "Package": 2696.39111328125,
+        "DayMonth_interact": 88.80811309814453,
+        "Price_lag7": 242.26882934570312,
+        "Price_rolling_mean7": 1082.195556640625
+    }
+}

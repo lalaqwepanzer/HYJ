@@ -11,7 +11,6 @@ from sklearn.pipeline import make_pipeline
 plt.rcParams['font.sans-serif'] = ['SimHei']
 plt.rcParams['axes.unicode_minus'] = False
 
-
 def load_and_preprocess_data(filepath):
     """
     加载数据并进行预处理
@@ -155,7 +154,6 @@ def simple_linear_regression(df, variety='PIE TYPE'):
 
     return lin_reg
 
-
 def polynomial_regression(df, degree=2):
     """
     多项式回归分析
@@ -248,7 +246,6 @@ def multiple_linear_regression(df):
     print('Model determination: ', score)
 
     return lin_reg
-
 
 def polynomial_multiple_regression(df, degree=2):
     """

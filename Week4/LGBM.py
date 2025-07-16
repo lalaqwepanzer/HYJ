@@ -78,11 +78,10 @@ def full_sample_training(df, target='Price'):
     # 创建数据集（禁用早停）
     train_data = lgb.Dataset(X, label=y, free_raw_data=False)
 
-    # 全样本训练（2000轮）
     model = lgb.train(
         params,
         train_data,
-        num_boost_round=2000,
+        num_boost_round=1000,
         callbacks=[lgb.log_evaluation(100)]
     )
 

@@ -83,11 +83,11 @@ def xgboost_full_sample_training(df, target='Price'):
     tscv = TimeSeriesSplit(n_splits=5)
     evals_result = {}  # 存储评估结果
 
-    # 全样本训练（带早停策略）[2](@ref)
+
     model = xgb.train(
         params,
         dtrain,
-        num_boost_round=2000,
+        num_boost_round = 50,
         evals=[(dtrain, 'train')],
         early_stopping_rounds=50,
         evals_result=evals_result,
